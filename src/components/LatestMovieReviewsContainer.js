@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import 'isomorphic-fetch';
 import MovieReviews from './MovieReviews'
 
-const NYT_API_KEY = 'dGpQ5OmGP2SgfvZimlpCUoF4iOag9qzZ';
+const NYT_API_KEY = 'z1CBxXFmW8LDAhfLc6UyaVjtoJN7G8fY';
 const URL = 'https://api.nytimes.com/svc/movies/v2/reviews/all.json?'
-            + `api-key=${z1CBxXFmW8LDAhfLc6UyaVjtoJN7G8fY}`;
+            + `api-key=${NYT_API_KEY}`;
 
 // Code LatestMovieReviewsContainer Here
 
@@ -17,14 +17,16 @@ export default class LatestMovieReviewsContainer extends Component {
         fetch(URL)
             .then(resp => resp.json())
             .then(data => {
-                //data.something
+                this.setState({
+                    reviews: data.results
+                })
             })
     }
 
     render() {
         return (
-            <div>
-                
+            <div className="latest-movie-reviews">
+                <MovieReviews reviews={this.state.reviews} />
             </div>
         )
     }
